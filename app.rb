@@ -65,12 +65,12 @@ end
 
 post "/tabletop/create" do
 	if current_user.administrator == true
-		tabletop_name = params[:name]
-		tabletop_version = params[:version]
-		tabletop_max_players = params[:max_players]
+		tabletop_name = params[:tabletop_name]
+		tabletop_version = params[:tabletop_version]
+		tabletop_max_players = params[:tabletop_max_players]
 		# tabletop_pro = params[:pro]
 
-		if name && version && max_players # && (!pro || pro)
+		if tabletop_name && tabletop_version && tabletop_max_players # && (!pro || pro)
 			t = Tabletop.new
 			t.name = tabletop_name
 			t.version = tabletop_version
@@ -78,7 +78,9 @@ post "/tabletop/create" do
 			# if tabletop_pro = "on"
 			# 	t.pro = true
 			# end
-			t.save
+			puts "Tabletop saved"
+			t.save		
+			redirect "/tabletop/tabletop_display.erb"
 		end
 	else
 		redirect "/"
