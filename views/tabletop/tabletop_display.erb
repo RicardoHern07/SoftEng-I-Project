@@ -1,0 +1,22 @@
+<div class = "container">
+	<% @tabletops.each do |tabletop| %>
+		<!-- Display every tabletop game available -->
+		<h><%= tabletop.name %></h>
+		<!-- Display .png of tabletop game -->
+		<p><%= tabletop.version %></p>
+	<!-- Use this if there are pro tabletop games
+		<% if @cur_user.pro == true || @cur.user.administrator == true %>
+			<h><%= tabletop.name %></h>
+			# Display .png of tabletop game
+			<p><%= tabletop.version %></p>
+
+		<% elsif @cur_user.pro == false || @cur_user.administrator == false %>
+			<% if tabletop.pro == false %>
+				<h><%= tabletop.name %></h>
+				# Display .png of tabletop game
+				<p><%= tabletop.version %></p>
+			<% end %>
+		<% end %>
+	-->
+	<% end %>
+</div>

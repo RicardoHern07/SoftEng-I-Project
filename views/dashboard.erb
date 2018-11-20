@@ -1,0 +1,10 @@
+
+<div class="container">
+	<%if current_user %>
+		<h1>Dashboard for <%= current_user.userName %></h1>
+
+		<p>Blah blah blah signed in stuff.</p>
+	<%else%>
+		<h1> Please Sign in to View Dashboard</h1>
+	<%end%>
+</div>
