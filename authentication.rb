@@ -1,6 +1,7 @@
 require 'sinatra'
 require_relative "user.rb"
 
+
 enable :sessions
 
 get "/login" do
