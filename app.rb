@@ -43,19 +43,8 @@ get "/" do
 	erb :index
 end
 
-get "/tabletop" do
-	authenticate!
-
-	if current_user
-		@tabletops = Tabletop.all
-		@cur_user = current_user
-		erb :"tabletop/tabletop_display"
-	end
-end
-
 get "/tabletop/new" do
 	authenticate!
-
 	if current_user.administrator == true
 		erb :"tabletop/tabletop_create"
 	else
@@ -64,25 +53,38 @@ get "/tabletop/new" do
 end
 
 post "/tabletop/create" do
+	authenticate!
 	if current_user.administrator == true
-		tabletop_name = params[:name]
-		tabletop_version = params[:version]
-		tabletop_max_players = params[:max_players]
+		tabletop_name = params[:tabletop_name]
+		tabletop_version = params[:tabletop_version]
+		tabletop_max_players = params[:tabletop_max_players]
 		# tabletop_pro = params[:pro]
-
-		if name && version && max_players # && (!pro || pro)
-			t = Tabletop.new
-			t.name = tabletop_name
-			t.version = tabletop_version
-			t.max_players = tabletop_max_players
-			# if tabletop_pro = "on"
-			# 	t.pro = true
-			# end
-			t.save
+		tabletops = Tabletop.all
+		if tabletop_name && tabletop_version && tabletop_max_players # && (!pro || pro)
+			tabletops.each do |tabletop|
+				if tabletop.name == tabletop_name && tabletop.version == tabletop_version
+					redirect "/"
+				end
+			end
+		t = Tabletop.new
+		t.name = tabletop_name
+		t.version = tabletop_version
+		t.max_players = tabletop_max_players
+		t.save
 		end
 	else
 		redirect "/"
 	end
+	redirect "/tabletop_display"
+	#@cur_user = current_user
+	#@tabletops = Tabletop.all
+	#erb :"tabletop/tabletop_display"
+end
+get "/tabletop_display" do
+	authenticate!
+	@cur_user = current_user
+	@tabletops = Tabletop.all
+	erb :"tabletop/tabletop_display"
 end
 
 get "/upgrade" do

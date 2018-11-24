@@ -6,8 +6,8 @@
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
       </li>
 
       <% if current_user %>
@@ -15,12 +15,17 @@
           <a class="nav-link" href="/dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/tabletop_display">Tabletop</a>
+        </li>
+        <% if current_user.administrator %>
+          <li class="nav-item">
+          <a class="nav-link" href="/tabletop/new">Add Tabletop</a>
+          </li>
+        <% end %>
+        <li class="nav-item">
           <a class="nav-link" href="/logout">Logout</a>
         </li>
       <% else %>
-        <li class="nav-item">
-          <a class="nav-link" href="/dashboard">Dashboard</a>
-        </li>
         <li class="nav-item">
         <!--  On click, would not load sign_up.erb -->
         <!--  <a class="nav-link" href="/sign_up" data-toggle="modal" data-target="#basicModal">Sign Up/Sign In</a> -->
