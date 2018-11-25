@@ -1,8 +1,20 @@
 <div class = "container">
 	<% @tabletops.each do |tabletop| %>
 		<!-- Display every tabletop game available -->
-		<h><%= tabletop.name %></h>
+				<% if tabletop.name == "MONOPOLY" %>
+				<h><%= tabletop.name %></h><br>
+					<% if tabletop.version == "GAMERS" %>
+						<h><a href = "/monopoly_Gamers_form"><%= tabletop.version %></a></h><br>
+					<% elsif tabletop.version == "Cheaters Edition" %>
+						<h><a href="/monopoly_cheaters"><%= tabletop.version %></a></h><br>
+					<% end %>
+				<% end %>
 		<!-- Display .png of tabletop game -->
-		<p><%= tabletop.version %></p>
+		Use this if there are pro tabletop games<br>
+		Here will be if we decide to make pro exclusive games.<br>
+		the added code is in the ProGames text file<br>
 	<% end %>
+</div>
+<div class="container">
+<h><a <%=tabletops.name>
 </div>

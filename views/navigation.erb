@@ -6,8 +6,8 @@
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
       </li>
 
       <% if current_user %>
@@ -25,12 +25,17 @@
           </li>
         <% end %>
         <li class="nav-item">
+          <a class="nav-link" href="/tabletop_display">Tabletop</a>
+        </li>
+        <% if current_user.administrator %>
+          <li class="nav-item">
+          <a class="nav-link" href="/tabletop/new">Add Tabletop</a>
+          </li>
+        <% end %>
+        <li class="nav-item">
           <a class="nav-link" href="/logout">Logout</a>
         </li>
       <% else %>
-        <li class="nav-item">
-          <a class="nav-link" href="/dashboard">Dashboard</a>
-        </li>
         <li class="nav-item">
 
         <!-- Only users that have not signed in are shown this link -->
