@@ -38,6 +38,14 @@ User.auto_upgrade!
 Tabletop.auto_upgrade!
 
 # Create admins
+if User.all(role: 2).count == 0
+	u = User.new
+	u.email = "admin@admin.com"
+	u.user_name = "admin"
+	u.password = "admin"
+	u.role = 2
+	u.save
+end
 
 get "/" do
 	erb :index
@@ -46,17 +54,16 @@ end
 get "/tabletop" do
 	authenticate!
 
-	if current_user
-		@tabletops = Tabletop.all
-		@cur_user = current_user
-		erb :"tabletop/tabletop_display"
-	end
+	@tabletops = Tabletop.all
+	@cur_user = current_user
+	erb :"tabletop/tabletop_display"
 end
 
 get "/tabletop/new" do
 	authenticate!
 
-	if current_user.administrator == true
+	# Must be an admin to access this page
+	if current_user.role == 2
 		erb :"tabletop/tabletop_create"
 	else
 		redirect "/"
@@ -64,7 +71,7 @@ get "/tabletop/new" do
 end
 
 post "/tabletop/create" do
-	if current_user.administrator == true
+	if current_user.role == 2
 		tabletop_name = params[:tabletop_name]
 		tabletop_version = params[:tabletop_version]
 		tabletop_max_players = params[:tabletop_max_players]
@@ -79,8 +86,9 @@ post "/tabletop/create" do
 			# 	t.pro = true
 			# end
 			puts "Tabletop saved"
-			t.save		
-			redirect "/tabletop/tabletop_display.erb"
+			t.save
+			@tabletops = Tabletop.all	
+			erb :"tabletop/tabletop_display"
 		end
 	else
 		redirect "/"
@@ -90,7 +98,7 @@ end
 get "/upgrade" do
 	authenticate!
 
-	if current_user.pro == false && current_user.administrator == false
+	if current_user.role == 0
 		erb :"stripe/pro_upgrade"
 	else
 		redirect "/"

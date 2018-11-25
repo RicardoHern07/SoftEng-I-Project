@@ -41,13 +41,12 @@ post "/register" do
 	u = User.new
 	u.email = email.downcase
 	u.password =  password
-	u.userName = username
+	u.user_name = username
 	u.save
 
 	session[:user_id] = u.id
 
 	erb :"authentication/successful_signup"
-
 end
 
 #This method will return the user object of the currently signed in user
