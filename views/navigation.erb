@@ -17,7 +17,7 @@
                 <!-- Only users that are not administrators and are not pro can see this link -->
         <% if current_user.role == 2 %>
           <li class="nav-item">
-            <a class="nav-link" href="/tabletop/new">New Tabletop</a>
+            <a class="nav-link" href="/tabletop/new">Add Tabletop</a>
           </li>
         <% elsif current_user.role == 0 %>
           <li class="nav-item">
@@ -27,26 +27,17 @@
         <li class="nav-item">
           <a class="nav-link" href="/tabletop_display">Tabletop</a>
         </li>
-        <% if current_user.administrator %>
-          <li class="nav-item">
-          <a class="nav-link" href="/tabletop/new">Add Tabletop</a>
-          </li>
-        <% end %>
         <li class="nav-item">
           <a class="nav-link" href="/logout">Logout</a>
-        </li>
+        </li> 
+      <!-- Only users that have not signed in are shown this link -->
       <% else %>
-        <li class="nav-item">
-
-        <!-- Only users that have not signed in are shown this link -->
-        <% if !current_user %>
         <li class="nav-item">
           <a class="nav-link"  data-toggle="modal" data-target="#SignIn" >Sign In</a>
         </li>
         <li class="nav-item">
           <a class="nav-link"  data-toggle="modal" data-target="#SignUp" >Sign Up</a>
         </li>
-        <% end %>
       <% end %>
     </ul>
 

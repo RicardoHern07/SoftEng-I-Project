@@ -33,7 +33,16 @@ class Tabletop
 	# property :pro, Boolean, :default => false
 end
 
+class Monopoly_player
+	include DataMapper::Resource
+
+	property :player_name
+	property :current_money
+	
+end
+
 DataMapper.finalize
+Monopoly_player.auto_upgrade!
 User.auto_upgrade!
 Tabletop.auto_upgrade!
 
@@ -51,9 +60,8 @@ get "/" do
 	erb :index
 end
 
-get "/tabletop" do
+get "/tabletop_display" do
 	authenticate!
-
 	@tabletops = Tabletop.all
 	@cur_user = current_user
 	erb :"tabletop/tabletop_display"
@@ -93,6 +101,10 @@ post "/tabletop/create" do
 	else
 		redirect "/"
 	end
+end
+
+get "/monopoly_Gamers_form" do 
+	erb :Monopoly_Gamers
 end
 
 get "/upgrade" do
