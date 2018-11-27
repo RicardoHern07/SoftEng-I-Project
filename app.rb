@@ -35,10 +35,10 @@ end
 
 class Monopoly_player
 	include DataMapper::Resource
-
-	property :player_name
-	property :current_money
-	
+	property :id, Serial
+	property :player_name, String
+	property :current_money, Integer
+	property :number_of_properties, Integer
 end
 
 DataMapper.finalize
@@ -47,6 +47,7 @@ User.auto_upgrade!
 Tabletop.auto_upgrade!
 
 # Create admins
+
 if User.all(role: 2).count == 0
 	u = User.new
 	u.email = "admin@admin.com"
@@ -55,11 +56,16 @@ if User.all(role: 2).count == 0
 	u.role = 2
 	u.save
 end
-
+#---------------------------------------------------------------#
+#variable used to know how many text boxes the form should show
+number_of_players = 0
+#---------------------------------------------------------------#
 get "/" do
 	erb :index
 end
 
+#displays all tabletop games available with their respective textboxes 
+#so that the user says how many players they have in their session
 get "/tabletop_display" do
 	authenticate!
 	@tabletops = Tabletop.all
@@ -67,9 +73,9 @@ get "/tabletop_display" do
 	erb :"tabletop/tabletop_display"
 end
 
+#checks if you are allowed to create a new tabletop
 get "/tabletop/new" do
 	authenticate!
-
 	# Must be an admin to access this page
 	if current_user.role == 2
 		erb :"tabletop/tabletop_create"
@@ -78,6 +84,7 @@ get "/tabletop/new" do
 	end
 end
 
+#creates a tabletop to be displayed in the tabletop_display
 post "/tabletop/create" do
 	if current_user.role == 2
 		tabletop_name = params[:tabletop_name]
@@ -90,10 +97,6 @@ post "/tabletop/create" do
 			t.name = tabletop_name
 			t.version = tabletop_version
 			t.max_players = tabletop_max_players
-			# if tabletop_pro = "on"
-			# 	t.pro = true
-			# end
-			puts "Tabletop saved"
 			t.save
 			@tabletops = Tabletop.all	
 			erb :"tabletop/tabletop_display"
@@ -103,13 +106,17 @@ post "/tabletop/create" do
 	end
 end
 
-get "/monopoly_Gamers_form" do 
-	erb :Monopoly_Gamers
+post "/monopoly_Gamers_form" do
+	if number_of_players 
+		number_of_players = params[:number_of_players]
+	else
+		number_of_players = 8
+	end
+	erb :"tabletop/monopoly_Gamers_form"
 end
 
 get "/upgrade" do
 	authenticate!
-
 	if current_user.role == 0
 		erb :"stripe/pro_upgrade"
 	else

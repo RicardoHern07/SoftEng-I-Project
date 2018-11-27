@@ -4,9 +4,17 @@
 				<% if tabletop.name == "MONOPOLY"%>
 				<h><%= tabletop.name %></h><br>
 					<% if tabletop.version == "GAMERS" %>
-						<h><a href = "/monopoly_Gamers_form"><%= tabletop.version %></a></h><br>
+						<h><%= tabletop.version %></h><br>
+						<form action="/monopoly_Gamers_form" method="post">
+						Number of Players:  <input type="text" name="number_of_players">
+						<button type="Submit" name = "" Value = "monopoly_Gamers_form" class="btn btn-outline-primary">Submit</button>
+						</form>
 					<% elsif tabletop.version == "Cheater's Edition" %>
-						<h><a href="/monopoly_cheaters"><%= tabletop.version %></a></h><br>
+						<h><%= tabletop.version %></a></h><br>
+						<form action = "/monopoly_cheaters" method= "post">
+						Number of Players:  <input type="text" name="number_of_players">
+						<button type="Submit" name = "" Value = "monopoly_cheaters" class="btn btn-outline-primary">Submit</button>
+						</form>
 					<% end %>
 				<% end %>
 		<!-- Display .png of tabletop game -->
