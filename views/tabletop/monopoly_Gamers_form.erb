@@ -1,7 +1,14 @@
-<form action="" method="post">
-	Player: <input type="text" name="Player_1"><br>
-	Version: <input type="text" name="tabletop_version"><br>
-	Max Players: <input type="text" name="tabletop_max_players"><br>
-	<!-- Pro: <input type="submit" name="pro"><br> -->
-	<input type="submit" name="" value="">
+<form action="/monopoly_Gamers_form/create" method="post">
+	<!--> the loop is used to display the correct amount of desired players
+	 furthermore, it uses instance variables to change the names of the parameters
+	 that each textbox holds <-->
+	<% while(@iterator_for_names <= @number_of_players) do %>
+		<% @player_string = "Player_" + @iterator_for_names.to_s%>
+		<%= @player_string %>: <input type="text" name=<%= @player_string %>><br>
+		<% @player_string = "Money_" + @iterator_for_names.to_s%>
+		<%= @player_string %>: <input type="text" name= <%= @player_string %>><br>
+		<% @iterator_for_names = @iterator_for_names+1  %>
+		<!-- Pro: <input type="submit" name="pro"><br> -->
+	<% end %>
+	<input type="submit" name="" value="Submit">
 </form>

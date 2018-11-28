@@ -6,6 +6,8 @@ require_relative "authentication.rb"
 # Set stripe secret key
 # Stripe.api_key = settings.secret_key
 
+number_of_players = 0
+
 set :publishable_key, 'pk_test_QzPFEBocGtBYwRV8kHu71KX8' #ENV['PUBLISHABLE_KEY']
 set :secret_key, 'sk_test_1uaXIj6rRI106ol3lWZCTke9' #ENV['SECRET_KEY']
 
@@ -38,7 +40,6 @@ class Monopoly_player
 	property :id, Serial
 	property :player_name, String
 	property :current_money, Integer
-	property :number_of_properties, Integer
 end
 
 DataMapper.finalize
@@ -56,10 +57,6 @@ if User.all(role: 2).count == 0
 	u.role = 2
 	u.save
 end
-#---------------------------------------------------------------#
-#variable used to know how many text boxes the form should show
-number_of_players = 0
-#---------------------------------------------------------------#
 get "/" do
 	erb :index
 end
@@ -106,13 +103,46 @@ post "/tabletop/create" do
 	end
 end
 
+
+#this post request is used to make sure we get the right
+#number of players and make sure we display the right amount
+#of players.
 post "/monopoly_Gamers_form" do
-	if number_of_players 
-		number_of_players = params[:number_of_players]
+	#---------------------------------------------------------------#
+	#variable used to know how many text boxes the form should show
+	@number_of_players = 0
+	#changes name of parameter
+	@player_string = ""
+	#iterator for parameter name change
+	@iterator_for_names = 1
+	#---------------------------------------------------------------#
+	
+	if params[:number_of_players] && params[:number_of_players].to_i <= 8
+		@number_of_players = params[:number_of_players].to_i
 	else
-		number_of_players = 8
+		@number_of_players = 8
 	end
+	number_of_players = @number_of_players
+
+	#form with the correct number of players
+	#there's alot of logic in erb form, however
+	#it is only used to show the correct number of textboxes
 	erb :"tabletop/monopoly_Gamers_form"
+end
+
+
+#this post request is used to create the players of the session
+post "/monopoly_Gamers_form/create" do
+	iterator = 1
+	while (iterator <= number_of_players) do
+		if (params['Player_' + iterator.to_s])
+			m = Monopoly_player.new
+			m.player_name = params['Player_' + iterator.to_s]
+			m.current_money = params['Money_' + iterator.to_s].to_i
+			m.save
+			iterator = iterator + 1
+		end
+	end
 end
 
 get "/upgrade" do

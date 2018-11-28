@@ -15,6 +15,12 @@
 						Number of Players:  <input type="text" name="number_of_players">
 						<button type="Submit" name = "" Value = "monopoly_cheaters" class="btn btn-outline-primary">Submit</button>
 						</form>
+					<% elsif tabletop.version == "Original" %>
+						<h><%= tabletop.version %></a></h><br>
+						<form action = "/monopoly_original" method= "post">
+						Number of Players:  <input type="text" name="number_of_players">
+						<button type="Submit" name = "" Value = "monopoly_cheaters" class="btn btn-outline-primary">Submit</button>
+						</form>
 					<% end %>
 				<% end %>
 		<!-- Display .png of tabletop game -->
