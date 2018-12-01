@@ -1,7 +1,8 @@
-<form action="/monopoly_Gamers_form/create" method="post">
-	<!--> the loop is used to display the correct amount of desired players
+<!-- the loop is used to display the correct amount of desired players
 	 furthermore, it uses instance variables to change the names of the parameters
-	 that each textbox holds <-->
+	 that each textbox holds 
+	 -->
+<form action="/monopoly_Original_form/properties" method="post">
 	<% while(@iterator_for_names <= @number_of_players) do %>
 		<% @player_string = "Player_" + @iterator_for_names.to_s%>
 		<%= @player_string %>: <input type="text" name=<%= @player_string %>><br>

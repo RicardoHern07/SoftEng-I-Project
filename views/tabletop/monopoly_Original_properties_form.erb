@@ -1,0 +1,12 @@
+<form action="/monopoly_Original_form/create" method="post">
+	<% @properties.each do |property| %>
+		<%= property.property_name %> <br>
+		<% @players.each do |player| %>
+			<label class="radio-inline">
+			<input type="radio" name=<%="Property" + @iterator_for_parameter_names.to_s %>"" value = <%=player.player_name %>><%=player.player_name %>
+			</label>
+		<% end %> <br>
+	<% @iterator_for_parameter_names += 1 %>
+	<% end %>
+	<input type="submit" name="" value="Submit">
+</form>

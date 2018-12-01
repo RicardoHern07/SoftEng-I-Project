@@ -1,13 +1,13 @@
 <div class = "container">
 	<% @tabletops.each do |tabletop| %>
 		<!-- Display every tabletop game available -->
-				<% if tabletop.name == "MONOPOLY"%>
+				<% if tabletop.name == "Monopoly"%>
 				<h><%= tabletop.name %></h><br>
-					<% if tabletop.version == "GAMERS" %>
+					<% if tabletop.version == "Original" %>
 						<h><%= tabletop.version %></h><br>
-						<form action="/monopoly_Gamers_form" method="post">
+						<form action="/monopoly_Original_form" method="post">
 						Number of Players:  <input type="text" name="number_of_players">
-						<button type="Submit" name = "" Value = "monopoly_Gamers_form" class="btn btn-outline-primary">Submit</button>
+						<button type="Submit" name = "" Value = "monopoly_Original_form" class="btn btn-outline-primary">Submit</button>
 						</form>
 					<% elsif tabletop.version == "Cheater's Edition" %>
 						<h><%= tabletop.version %></a></h><br>
@@ -15,11 +15,11 @@
 						Number of Players:  <input type="text" name="number_of_players">
 						<button type="Submit" name = "" Value = "monopoly_cheaters" class="btn btn-outline-primary">Submit</button>
 						</form>
-					<% elsif tabletop.version == "Original" %>
+					<% elsif tabletop.version == "Gamers" %>
 						<h><%= tabletop.version %></a></h><br>
-						<form action = "/monopoly_original" method= "post">
+						<form action = "/monopoly_Gamers" method= "post">
 						Number of Players:  <input type="text" name="number_of_players">
-						<button type="Submit" name = "" Value = "monopoly_cheaters" class="btn btn-outline-primary">Submit</button>
+						<button type="Submit" name = "" Value = "monopoly_Gamers" class="btn btn-outline-primary">Submit</button>
 						</form>
 					<% end %>
 				<% end %>
