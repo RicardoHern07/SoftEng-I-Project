@@ -3,7 +3,7 @@
 		<!-- Display every session game the user has -->
 		<form action="/monopoly_original_session_form" method="post">
 			Session_<%=session.id %>
-			<button type="submit" name="Session" value=<%=session.id %>>Access</button>
+			<button type="submit" name="Session" value=<%=session.session_user_id %>>Access</button>
 		</form>
 		<!-- Display .png of tabletop game -->
 	<% end %>
