@@ -1,6 +1,7 @@
 <div class = "container">
 	<% @players.each do |player| %>
-		<h>Player:<%=player.player_name %><br></h>
+		<h>Player:<%=player.player_name %></h><br>
+		<h>Money: <%=player.current_money %></h><br>
 		<% @properties_for_session.each do |property| %>
 			<% property.each do |property_1| %>
 				<% if player.id == property_1.player_id %>
