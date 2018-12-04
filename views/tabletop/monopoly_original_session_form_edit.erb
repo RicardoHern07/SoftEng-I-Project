@@ -1,0 +1,16 @@
+<form action="/monopoly_original_session_form/update" method="post">
+	<% @players.each do |player| %>
+		<h2 style="font-family:times;color:red;">Player: <%=player.player_name %></h2>
+		Money: <input type="text" name= <%= player.player_name %>><br>
+	<% end %>
+	<% @properties.each do |property| %>
+		<%= property.property_name %> <br>
+		<% @players.each do |player| %>
+			<label class="radio-inline">
+			<input type="radio" name=<%="Property" + @iterator_for_parameter_names.to_s %>"" value = <%=player.player_name %>><%=player.player_name %>
+			</label>
+		<% end %> <br>
+		<% @iterator_for_parameter_names += 1 %>
+	<% end %>
+	<button type="submit" name="Session" value=<%=@current_session %>>Submit</button>
+</form>
