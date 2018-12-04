@@ -1,13 +1,16 @@
-<form action="/charge" method="post" class="payment">
-    <article>
-      <label class="amount">
-        <span>Amount: $4.00</span>
-      </label>
-    </article>
+<div class="jumbotron" style="background-image:url('/images/LogoMakr_3qeKYo.jpg'); background-repeat: no-repeat">
 
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="<%= settings.publishable_key %>"
-            data-description="A month's subscription"
-            data-amount="400"
-            data-locale="auto"></script>
-</form>
+  <form action="/charge" method="post" class="payment" style=text-align:right>
+      <article>
+        <label class="amount">
+          <span style="font-family:times;color:red;font-size:160%">Amount: $4.00</span>
+        </label>
+      </article>
+
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= settings.publishable_key %>"
+              data-description="A month's subscription"
+              data-amount="400"
+              data-locale="auto"></script>
+  </form>
+</div>

@@ -6,6 +6,8 @@ require_relative "authentication.rb"
 # Set stripe secret key
 # Stripe.api_key = settings.secret_key
 
+#H_1 = {"Property" => user_id}
+
 number_of_players = 0
 
 set :publishable_key, 'pk_test_QzPFEBocGtBYwRV8kHu71KX8' #ENV['PUBLISHABLE_KEY']
@@ -40,15 +42,44 @@ class Monopoly_player
 	property :id, Serial
 	property :player_name, String
 	property :current_money, Integer
+	property :session_id, Integer
+	property :user_id, Integer
+
+end
+
+class Properties
+	include DataMapper::Resource
+	property :id, Serial
+	property :property_name, String
+	property :property_color, String
+end
+
+class Player_Properties 
+	include DataMapper::Resource
+	property :id, Serial
+	property :player_id, Integer
+	property :monopoly_property_id, Integer
+	property :monopoly_property_name, String
+end
+
+class Session
+	include DataMapper::Resource
+	property :id, Serial
+	property :user_id, Integer
+	property :tabletop_game_name, String
+	property :session_user_id, Integer
 end
 
 DataMapper.finalize
 Monopoly_player.auto_upgrade!
 User.auto_upgrade!
 Tabletop.auto_upgrade!
+Properties.auto_upgrade!
+Player_Properties.auto_upgrade!
+Session.auto_upgrade!
+
 
 # Create admins
-
 if User.all(role: 2).count == 0
 	u = User.new
 	u.email = "admin@admin.com"
@@ -58,6 +89,7 @@ if User.all(role: 2).count == 0
 	u.save
 end
 get "/" do
+
 	erb :index
 end
 
@@ -107,7 +139,7 @@ end
 #this post request is used to make sure we get the right
 #number of players and make sure we display the right amount
 #of players.
-post "/monopoly_Gamers_form" do
+post "/monopoly_Original_form" do
 	#---------------------------------------------------------------#
 	#variable used to know how many text boxes the form should show
 	@number_of_players = 0
@@ -127,22 +159,79 @@ post "/monopoly_Gamers_form" do
 	#form with the correct number of players
 	#there's alot of logic in erb form, however
 	#it is only used to show the correct number of textboxes
-	erb :"tabletop/monopoly_Gamers_form"
+	erb :"tabletop/monopoly_Original_form"
 end
 
 
 #this post request is used to create the players of the session
-post "/monopoly_Gamers_form/create" do
+post "/monopoly_Original_form/properties" do
 	iterator = 1
-	while (iterator <= number_of_players) do
+	session_id_locator = Session.all(:user_id => current_user.id).count + 1
+	puts session_id_locator
+	while (iterator <= number_of_players) do 
 		if (params['Player_' + iterator.to_s])
 			m = Monopoly_player.new
 			m.player_name = params['Player_' + iterator.to_s]
 			m.current_money = params['Money_' + iterator.to_s].to_i
+			m.session_id = session_id_locator
+			m.user_id = current_user.id
 			m.save
 			iterator = iterator + 1
 		end
 	end
+	#---------------------------------------------------------------#
+	#iterator for parameter name change
+	@iterator_for_parameter_names = 1
+	#---------------------------------------------------------------#
+	@players = Monopoly_player.all(:session_id => session_id_locator, :user_id => current_user.id)
+	@properties = Properties.all()
+	erb :"tabletop/monopoly_Original_properties_form"
+end
+
+post "/monopoly_Original_form/create" do
+	property_iterator = 1
+	session_id_locator = Session.all(:user_id => current_user.id).count + 1
+	while (property_iterator <= 28)
+		pp = Player_Properties.new
+		monopoly_player_id = Monopoly_player.all(:player_name => params["Property" + property_iterator.to_s + "\"\""], :session_id => session_id_locator, :user_id => current_user.id)
+		monopoly_player_id.each do |mono_player|
+			pp.player_id = mono_player.id
+			pp.monopoly_property_id = Properties.get(property_iterator).id
+			pp.monopoly_property_name = Properties.get(property_iterator).property_name
+			pp.save
+		end
+		property_iterator += 1 
+	end
+	s = Session.new
+	s.user_id = current_user.id
+	s.tabletop_game_name = "Monopoly_Original"
+	s.session_user_id = session_id_locator
+	s.save
+	@sessions = Session.all(:user_id => current_user.id)
+	erb :session_list
+end
+
+post "/monopoly_original_session_form" do
+	@properties_for_session = []
+	iterator_for_properties = 0
+	session_locator = Session.all(:user_id => current_user.id)
+	current_session = params[:Session]
+	puts session_locator
+	puts current_session
+	session_locator.each do |session|
+		@players = Monopoly_player.all(:session_id => current_session, :user_id => current_user.id)
+		puts @players
+	end	
+	@players.each do |player|
+		@properties_for_session[iterator_for_properties] = Player_Properties.all(:player_id => player.id)
+		iterator_for_properties += 1
+	end
+	erb :"tabletop/monopoly_original_session_form"
+end
+
+get "/session_list" do
+	@sessions = Session.all(:user_id => current_user.id)
+	erb :session_list
 end
 
 get "/upgrade" do

@@ -104,7 +104,6 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  bcrypt
   data_mapper
   dm-postgres-adapter
   dm-sqlite-adapter
