@@ -115,6 +115,7 @@ end
 
 #creates a tabletop to be displayed in the tabletop_display
 post "/tabletop/create" do
+	authenticate!
 	if current_user.role == 2
 		tabletop_name = params[:tabletop_name]
 		tabletop_version = params[:tabletop_version]
@@ -140,6 +141,7 @@ end
 #number of players and make sure we display the right amount
 #of players.
 post "/monopoly_Original_form" do
+	authenticate!
 	#---------------------------------------------------------------#
 	#variable used to know how many text boxes the form should show
 	@number_of_players = 0
@@ -165,6 +167,7 @@ end
 
 #this post request is used to create the players of the session
 post "/monopoly_Original_form/properties" do
+	authenticate!
 	iterator = 1
 	session_id_locator = Session.all(:user_id => current_user.id).count + 1
 	puts session_id_locator
@@ -189,6 +192,7 @@ post "/monopoly_Original_form/properties" do
 end
 
 post "/monopoly_Original_form/create" do
+	authenticate!
 	property_iterator = 1
 	session_id_locator = Session.all(:user_id => current_user.id).count + 1
 	while (property_iterator <= 28)
@@ -212,6 +216,7 @@ post "/monopoly_Original_form/create" do
 end
 
 post "/monopoly_original_session_form" do
+	authenticate!
 	@properties_for_session = []
 	iterator_for_properties = 0
 	session_locator = Session.all(:user_id => current_user.id)
@@ -230,6 +235,7 @@ post "/monopoly_original_session_form" do
 end
 
 get "/session_list" do
+	authenticate!
 	@sessions = Session.all(:user_id => current_user.id)
 	erb :session_list
 end
