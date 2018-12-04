@@ -18,54 +18,28 @@ h2{
 		<% @tabletops.each do |tabletop| %>
 			<!-- Display every tabletop game available -->
 					<% if tabletop.name == "Monopoly"%>
-					<h2 style="font-family:times;color:red"><%= tabletop.name %></h2>
-						<% if tabletop.version == "GAMERS" %>
-							<h2 style="font-family:times;color:red"><%= tabletop.version %></h2>
-							<form action="/monopoly_Gamers_form" method="post">
-							<p style="font-family:times;color:black">Number of Players:  <input type="text" name="number_of_players">
-								<button type="Submit" name = "" Value = "monopoly_Gamers_form" class="btn btn-outline-primary">Submit</button>
-							</p>
-							</form>
-						<% elsif tabletop.version == "Cheater's Edition" %>
-							<h2 style="font-family:times;color:red"><%= tabletop.version %></a></h2>
-							<form action = "/monopoly_cheaters" method= "post">
-							<p style="font-family:times;color:black"> Number of Players:  <input type="text" name="number_of_players">
-								<button type="Submit" name = "" Value = "monopoly_cheaters" class="btn btn-outline-primary">Submit</button>
-							</p>
-							</form>
-						<% elsif tabletop.version == "Original" %>
-							<h2 style="font-family:times;color:red"><%= tabletop.version %></a></h2>
-							<form action = "/monopoly_original" method= "post">
-							<p style="font-family:times;color:black">Number of Players:  <input type="text" name="number_of_players" >
-								<button type="Submit" name = "" Value = "monopoly_cheaters" class="btn btn-outline-primary">Submit</button>
-							</p>
-							</form>
-						<% end %>
-=======
-<div class = "container">
-	<% @tabletops.each do |tabletop| %>
-		<!-- Display every tabletop game available -->
-				<% if tabletop.name == "Monopoly"%>
-				<h><%= tabletop.name %></h><br>
+				<h2 style="font-family:times;color:red"><%= tabletop.name %></h2><br>
 					<% if tabletop.version == "Original" %>
-						<h><%= tabletop.version %></h><br>
+						<h2 style="font-family:times;color:red"><%= tabletop.version %></h2><br>
 						<form action="/monopoly_Original_form" method="post">
-						Number of Players:  <input type="text" name="number_of_players">
-						<button type="Submit" name = "" Value = "monopoly_Original_form" class="btn btn-outline-primary">Submit</button>
-						</form>
+						<p style="font-family:times;color:black">Number of Players:  <input type="text" name="number_of_players">
+						   <button type="Submit" name = "" Value = "monopoly_Original_form" class="btn btn-outline-primary">Submit</button>
+            </p>
+            </form>
 					<% elsif tabletop.version == "Cheater's Edition" %>
-						<h><%= tabletop.version %></a></h><br>
+						<h2 style="font-family:times;color:red"><%= tabletop.version %></h2><br>
 						<form action = "/monopoly_cheaters" method= "post">
-						Number of Players:  <input type="text" name="number_of_players">
-						<button type="Submit" name = "" Value = "monopoly_cheaters" class="btn btn-outline-primary">Submit</button>
-						</form>
+						<p style="font-family:times;color:black">Number of Players:  <input type="text" name="number_of_players">
+						      <button type="Submit" name = "" Value = "monopoly_cheaters" class="btn btn-outline-primary">Submit</button>
+           </p>
+            </form>
 					<% elsif tabletop.version == "Gamers" %>
-						<h><%= tabletop.version %></a></h><br>
+						<h2 style="font-family:times;color:red"><%= tabletop.version %></h2><br>
 						<form action = "/monopoly_Gamers" method= "post">
-						Number of Players:  <input type="text" name="number_of_players">
-						<button type="Submit" name = "" Value = "monopoly_Gamers" class="btn btn-outline-primary">Submit</button>
-						</form>
->>>>>>> origin/master
+						<p style="font-family:times;color:black">Number of Players:  <input type="text" name="number_of_players">
+						   <button type="Submit" name = "" Value = "monopoly_Gamers" class="btn btn-outline-primary">Submit</button>
+            </p?
+            </form>
 					<% end %>
 			<!-- Display .png of tabletop game -->
 		<% end %>
