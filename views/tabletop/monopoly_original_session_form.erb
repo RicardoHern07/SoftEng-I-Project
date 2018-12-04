@@ -1,10 +1,10 @@
-<div class = "container">
+<div class="jumbotron" style="background-image:url('/images/LogoMakr_3qeKYo.jpg'); background-repeat: no-repeat;height: 450px">
 	<% @players.each do |player| %>
-		<h>Player:<%=player.player_name %><br></h>
+		<h2 style="font-family:times;color:red;text-align:right">Player:<%=player.player_name %></h2>
 		<% @properties_for_session.each do |property| %>
 			<% property.each do |property_1| %>
 				<% if player.id == property_1.player_id %>
-					<%=property_1.monopoly_property_name %><br>
+						<p style="font-family:times;color:black"><%=property_1.monopoly_property_name %></p>
 				<% end %>
 			<% end %>
 		<% end %>
