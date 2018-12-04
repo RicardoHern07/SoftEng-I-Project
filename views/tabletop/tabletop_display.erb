@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <style type="text/css">
 body {
 }
@@ -10,37 +9,37 @@ h2{
   padding: 0;
   display: inline;
 }
-
 </style>
 
-	<div class="jumbotron" style="background-image:url('/images/LogoMakr_3qeKYo.jpg'); background-repeat: no-repeat">
+	<div class="jumbotron" style="background-image:url('/images/LogoMakr_3qeKYo.jpg'); background-repeat: no-repeat;height: 450px">
 		<article style=text-align:right>
 		<% @tabletops.each do |tabletop| %>
 			<!-- Display every tabletop game available -->
 					<% if tabletop.name == "Monopoly"%>
-				<h2 style="font-family:times;color:red"><%= tabletop.name %></h2><br>
-					<% if tabletop.version == "Original" %>
-						<h2 style="font-family:times;color:red"><%= tabletop.version %></h2><br>
-						<form action="/monopoly_Original_form" method="post">
-						<p style="font-family:times;color:black">Number of Players:  <input type="text" name="number_of_players">
-						   <button type="Submit" name = "" Value = "monopoly_Original_form" class="btn btn-outline-primary">Submit</button>
-            </p>
-            </form>
-					<% elsif tabletop.version == "Cheater's Edition" %>
-						<h2 style="font-family:times;color:red"><%= tabletop.version %></h2><br>
-						<form action = "/monopoly_cheaters" method= "post">
-						<p style="font-family:times;color:black">Number of Players:  <input type="text" name="number_of_players">
-						      <button type="Submit" name = "" Value = "monopoly_cheaters" class="btn btn-outline-primary">Submit</button>
-           </p>
-            </form>
-					<% elsif tabletop.version == "Gamers" %>
-						<h2 style="font-family:times;color:red"><%= tabletop.version %></h2><br>
-						<form action = "/monopoly_Gamers" method= "post">
-						<p style="font-family:times;color:black">Number of Players:  <input type="text" name="number_of_players">
-						   <button type="Submit" name = "" Value = "monopoly_Gamers" class="btn btn-outline-primary">Submit</button>
-            </p?
-            </form>
-					<% end %>
+				      <h2 style="font-family:times;color:red"><%= tabletop.name %></h2>
+    					<% if tabletop.version == "Original" %>
+    						<h2 style="font-family:times;color:red"><%= tabletop.version %></h2>
+    						<form action="/monopoly_Original_form" method="post">
+    						<p style="font-family:times;color:black">Number of Players:  <input type="text" name="number_of_players">
+    						   <button type="Submit" name = "" Value = "monopoly_Original_form" class="btn btn-outline-primary">Submit</button>
+                </p>
+                </form>
+    					<% elsif tabletop.version == "Cheater's Edition" %>
+    						<h2 style="font-family:times;color:red"><%= tabletop.version %></h2>
+    						<form action = "/monopoly_cheaters" method= "post">
+    						<p style="font-family:times;color:black">Number of Players:  <input type="text" name="number_of_players">
+    						      <button type="Submit" name = "" Value = "monopoly_cheaters" class="btn btn-outline-primary">Submit</button>
+               </p>
+                </form>
+    					<% elsif tabletop.version == "Gamers" %>
+    						<h2 style="font-family:times;color:red"><%= tabletop.version %></h2>
+    						<form action = "/monopoly_Gamers" method= "post">
+    						<p style="font-family:times;color:black">Number of Players:  <input type="text" name="number_of_players">
+    						   <button type="Submit" name = "" Value = "monopoly_Gamers" class="btn btn-outline-primary">Submit</button>
+                </p?
+                </form>
+    					<% end %>
+          <% end %>
 			<!-- Display .png of tabletop game -->
 		<% end %>
 	</article>
