@@ -8,6 +8,9 @@
 				<button type="submit" name="Session" class="btn btn-outline-primary" value=<%=session.session_user_id %>>Access</button>
 			</h2>
 		</form>
+		<form action="/monopoly_original_session_form/edit" method="post">
+			<button type="submit" name="Session" value=<%=session.session_user_id %>>Edit</button>
+		</form>
 		<!-- Display .png of tabletop game -->
 	<% end %>
 </div>
