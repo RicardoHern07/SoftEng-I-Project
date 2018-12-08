@@ -1,10 +1,14 @@
-<div class="jumbotron" style="background-image:url('/images/LogoMakr_3qeKYo.jpg'); background-repeat: no-repeat;text-align:right;height: 450px" >
+<div style="text-align:justify;padding-top: 2rem;">
+	<p style="float:left"><img src="/images/LogoMakr_3qeKYo.jpg"/></p>
+<div class="boxed"	style="padding-top: 2rem;  padding-left: 40rem;text-align:justify">
 	<% @sessions.each do |session| %>
 		<!-- Display every session game the user has -->
 		<form action="/monopoly_original_session_form" method="post">
-			Session_<%=session.session_user_id %>
-			<button type="submit" name="Session" value=<%=session.session_user_id %>>Access</button>
+			<h2 style="font-family:times;color:red;font-size:150%;">Session_<%=session.session_user_id %>
+				<button type="submit" name="Session" class="btn btn-outline-primary" value=<%=session.session_user_id %>>Access</button>
+			</h2>
 		</form>
 		<!-- Display .png of tabletop game -->
 	<% end %>
+</div>
 </div>

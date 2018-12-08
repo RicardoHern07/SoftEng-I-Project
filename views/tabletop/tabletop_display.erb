@@ -11,8 +11,9 @@ h2{
 }
 </style>
 
-	<div class="jumbotron" style="background-image:url('/images/LogoMakr_3qeKYo.jpg'); background-repeat: no-repeat;height: 450px">
-		<article style=text-align:right>
+<div style="text-align:justify;padding-top: 2rem;">
+  <p style="float:left"><img src="/images/LogoMakr_3qeKYo.jpg"/></p>
+  <div class="boxed"	style="padding-top: 2rem;  padding-left: 40rem;text-align:justify">
 		<% @tabletops.each do |tabletop| %>
 			<!-- Display every tabletop game available -->
 					<% if tabletop.name == "Monopoly"%>
@@ -36,11 +37,11 @@ h2{
     						<form action = "/monopoly_Gamers" method= "post">
     						<p style="font-family:times;color:black">Number of Players:  <input type="text" name="number_of_players">
     						   <button type="Submit" name = "" Value = "monopoly_Gamers" class="btn btn-outline-primary">Submit</button>
-                </p?
+                </p>
                 </form>
     					<% end %>
           <% end %>
 			<!-- Display .png of tabletop game -->
 		<% end %>
-	</article>
+	</div>
 	</div>

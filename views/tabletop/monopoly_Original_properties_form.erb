@@ -1,13 +1,29 @@
-<form action="/monopoly_Original_form/create" method="post">
-	sadbakjdbkajbjdk
-	<% @properties.each do |property| %>
-		<%= property.property_name %> <br>
-		<% @players.each do |player| %>
-			<label class="radio-inline">
-			<input type="radio" name=<%="Property" + @iterator_for_parameter_names.to_s %>"" value = <%=player.player_name %>><%=player.player_name %>
-			</label>
-		<% end %> <br>
-	<% @iterator_for_parameter_names += 1 %>
-	<% end %>
-	<input type="submit" name="" value="Submit">
-</form>
+<style type="text/css">
+	.horizontal {
+  display:inline-block;
+  width: 20%;
+	height:250px;
+	vertical-align: top;
+}
+</style>
+
+<div class="boxed"	style="padding-top: 2rem;padding-left: 2rem;padding-bottom: 3rem;padding-right: 2rem;text-align:justify">
+
+	<form action="/monopoly_Original_form/create" method="post">
+		<% @properties.each do |property| %>
+		<div class="horizontal"	style=" text-align:right;border: 5px solid red;">
+
+				<h2 style="font-family:times;color:red;text-align:center"><%= property.property_name %> </h2>
+				<% @players.each do |player| %>
+					<label class="radio-inline">
+						<h3 style="font-family:times;color:black;"><input type="radio" name=<%="Property" + @iterator_for_parameter_names.to_s %>"" value = <%=player.player_name %>><%=player.player_name %>
+							</h3>
+					</label>
+				<% end %> <br>
+			<% @iterator_for_parameter_names += 1 %>
+			</div>
+		<% end %>
+		<hr>
+		<input type="submit" name="" value="Submit" class="btn btn-outline-primary">
+	</form>
+</div>

@@ -1,18 +1,19 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 
-<div class="jumbotron" style="background-image:url('/images/LogoMakr_3qeKYo.jpg'); background-repeat: no-repeat;height: 450px">
-  <div class="container">
+<div style="text-align:justify;padding-top: 2rem;">
+  <p style="float:left"><img src="/images/LogoMakr_3qeKYo.jpg"/></p>
+
+  <div class="boxed"	style="padding-top: 2rem;  padding-left: 40rem;text-align:justify">
     <%if current_user %>
-      <h1 class="display-3" align = "right" style="font-family:courier;">Hello, <%= current_user.user_name %>!</h1>
+      <h1 class="display-3"  style="font-family:courier;">Hello, <%= current_user.user_name %>!</h1>
     <%else%>
-      <h1 class="display-3" align = "right" style="font-family:courier;">Hello, World!</h1>
+      <h1 class="display-3"style="font-family:courier;">Hello, World!</h1>
     <%end%>
-    <p align = "right" style="font-family:courier;">Use it as a starting point to create something more unique.</p>
+    <p  style="font-family:courier;">Use it as a starting point to create something more unique.</p>
     <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>-->
   </div>
 </div>
 
-<div class="container">
   <!-- Example row of columns -->
 <!--  <div class="row">
     <div class="col-md-4">
@@ -31,7 +32,3 @@
       <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
     </div>
   </div>-->
-
-  <hr>
-
-</div> <!-- /container -->

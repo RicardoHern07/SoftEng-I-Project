@@ -1,10 +1,13 @@
+<div style="text-align:justify;padding-top: 2rem;">
+	<p style="float:left"><img src="/images/LogoMakr_3qeKYo.jpg"/></p>
+	<div class="boxed"	style="padding-top: 2rem;  padding-left: 40rem;text-align:justify">
 
-<div class="jumbotron" style="background-image:url('/images/LogoMakr_3qeKYo.jpg'); background-repeat: no-repeat;text-align:right;height: 450px" >
 	<%if current_user %>
-		<h1 style="font-family:stencil;">Dashboard for <%= current_user.user_name %></h1>
 
-		<p>Blah blah blah signed in stuff.</p>
+	  <h1 style="font-family:stencil">Dashboard for <%= current_user.user_name %></h1>
+		<p style="font-family:times;">Blah blah blah signed in stuff.</p>
 	<%else%>
 		<h1> Please Sign in to View Dashboard</h1>
 	<%end%>
+</div>
 </div>
