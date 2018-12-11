@@ -92,6 +92,7 @@ if User.all(role: 2).count == 0
 	u.save
 end
 get "/" do
+	
 	erb :index
 end
 
@@ -158,7 +159,6 @@ post "/monopoly_Original_form" do
 	#iterator for parameter name change
 	@iterator_for_names = 1
 	#---------------------------------------------------------------#
-	puts user_sessions_number
 	if (user_sessions_number == 0 && current_user.role == 0) || current_user.role == 1 || current_user.role == 2
 		if params[:number_of_players] && params[:number_of_players].to_i <= 8
 			@number_of_players = params[:number_of_players].to_i
@@ -182,7 +182,6 @@ post "/monopoly_Original_form/properties" do
 	authenticate!
 	iterator = 1
 	session_id_locator = Session.all(:user_id => current_user.id).count + 1
-	puts session_id_locator
 	while (iterator <= number_of_players) do 
 		if (params['Player_' + iterator.to_s])
 			m = Monopoly_player.new
@@ -246,7 +245,6 @@ post "/monopoly_original_session_form" do
 	current_session = params[:Session]
 	session_locator.each do |session|
 		@players = Monopoly_player.all(:session_id => current_session, :user_id => current_user.id)
-		puts @players
 	end	
 	@players.each do |player|
 		@properties_for_session[iterator_for_properties] = Player_Properties.all(:player_id => player.id)

@@ -1,3 +1,9 @@
+<style type="text/css">
+	form,button{
+		display:inline-block;
+	}
+</style>
+
 <div style="text-align:justify;padding-top: 2rem;">
 	<p style="float:left"><img src="/images/LogoMakr_3qeKYo.jpg"/></p>
 <div class="boxed"	style="padding-top: 2rem;  padding-left: 40rem;text-align:justify">
@@ -9,8 +15,9 @@
 			</h2>
 		</form>
 		<form action="/monopoly_original_session_form/edit" method="post">
-			<button type="submit" name="Session" value=<%=session.session_user_id %>>Edit</button>
+			<button type="submit" name="Session" class="btn btn-outline-primary" value=<%=session.session_user_id %>>Edit</button>
 		</form>
+		<br>
 		<!-- Display .png of tabletop game -->
 	<% end %>
 </div>
