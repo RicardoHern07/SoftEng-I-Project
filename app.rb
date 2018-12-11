@@ -103,7 +103,7 @@ get "/tabletop_display" do
 	@tabletops = Tabletop.all
 	@cur_user = current_user
 	@session_id_locator = Session.all(:user_id => current_user.id).count + 1
-	session_fixer = Monopoly_player.all(:session_id => @session_id_locator)
+	session_fixer = Monopoly_player.all(:session_id => @session_id_locator, :user_id => current_user.id)
 	session_fixer.each do |cancelled_player|
 		cancelled_player.destroy
 	end
@@ -277,7 +277,6 @@ post "/monopoly_original_session_form/update" do
 	end
 	players = Monopoly_player.all(:session_id => params[:Session])
 	players.each do |player|
-		#player_props = Player_Properties.all(:player_id => player.id)
 		player.update(:current_money => params[player.player_name])
 	end
 	while (property_iterator <= 28)
