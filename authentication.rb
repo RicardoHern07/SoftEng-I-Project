@@ -1,7 +1,6 @@
 require 'sinatra'
 require_relative "user.rb"
 
-
 enable :sessions
 
 get "/login" do
@@ -36,17 +35,20 @@ end
 post "/register" do
 	email = params[:email]
 	password = params[:password]
-	username = params[:userName]
 
-	u = User.new
-	u.email = email.downcase
-	u.password =  password
-	u.user_name = username
-	u.save
+	if email && password && User.first(email: email.downcase).nil?
+		u = User.new
+		u.email = email.downcase
+		u.password =  password
+		u.save
 
-	session[:user_id] = u.id
+		session[:user_id] = u.id
 
-	erb :"authentication/successful_signup"
+		erb :"authentication/successful_signup"
+	else
+		erb :"authentication/failed_signup"
+	end
+
 end
 
 #This method will return the user object of the currently signed in user
@@ -63,7 +65,6 @@ end
 #if the user is not signed in, will redirect to login page
 def authenticate!
 	if !current_user
-		#make error message displaying to signup but redirect to home
-		redirect "/"
+		redirect "/login"
 	end
 end
