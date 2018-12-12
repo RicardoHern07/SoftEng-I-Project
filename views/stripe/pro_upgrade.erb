@@ -1,19 +1,13 @@
-<div style="text-align:justify;padding-top: 2rem;">
- <p style="float:left"><img src="/images/LogoMakr_3qeKYo.jpg"/></p>
- <div class="boxed"	style="padding-top: 2rem;  padding-left: 40rem;text-align:justify">
+<form action="/charge" method="post" class="payment">
+    <article>
+      <label class="amount">
+        <span>Amount: $5.00</span>
+      </label>
+    </article>
 
-  <form action="/charge" method="post" class="payment">
-      <article>
-        <label class="amount">
-          <span style="font-family:times;color:red;font-size:160%">Amount: $4.00</span>
-        </label>
-      </article>
-
-      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-              data-key="<%= settings.publishable_key %>"
-              data-description="A month's subscription"
-              data-amount="400"
-              data-locale="auto"></script>
-  </form>
-  </div>
-</div>
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= settings.publishable_key %>"
+            data-description="A month's subscription"
+            data-amount="500"
+            data-locale="auto"></script>
+</form>
