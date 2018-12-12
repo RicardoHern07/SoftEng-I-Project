@@ -1,0 +1,13 @@
+		<!--><% if @cur_user.pro == true || @cur_user.administrator == true %>
+			<h><%= tabletop.name %></h>
+			# Display .png of tabletop game
+			<p><%= tabletop.version %></p>
+
+		<% elsif @cur_user.pro == false || @cur_user.administrator == false %>
+			<% if tabletop.pro == false %>
+				<h><%= tabletop.name %></h>
+				# Display .png of tabletop game
+				<p><%= tabletop.version %></p>
+			<% end %>
+		<% end %><-->
+	

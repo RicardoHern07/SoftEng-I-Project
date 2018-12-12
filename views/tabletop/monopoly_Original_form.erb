@@ -1,0 +1,20 @@
+<!-- the loop is used to display the correct amount of desired players
+	 furthermore, it uses instance variables to change the names of the parameters
+	 that each textbox holds
+	 -->
+	 <div style="text-align:justify;padding-top: 2rem;">
+	 	<p style="float:left"><img src="/images/LogoMakr_3qeKYo.jpg"/></p>
+		 <div class="boxed"	style="padding-top: 2rem;  padding-left: 40rem;text-align:justify">
+				<form action="/monopoly_Original_form/properties" method="post">
+					<% while(@iterator_for_names <= @number_of_players) do %>
+						<h2 style="font-family:times;color:red;"><% @player_string = "Player_" + @iterator_for_names.to_s%>
+						<%= @player_string %>: <input type="text" name=<%= @player_string %>></h2><br>
+						<h2 style="font-family:times;color:red;"><% @player_string = "Money_" + @iterator_for_names.to_s%>
+						<%= @player_string %>: <input type="text" name= <%= @player_string %>></h2><br>
+						<% @iterator_for_names = @iterator_for_names+1  %>
+						<!-- Pro: <input type="submit" name="pro"><br> -->
+					<% end %>
+					<input type="submit" name="" value="Submit" class="btn btn-outline-primary">
+				</form>
+			</div>
+		</div>
