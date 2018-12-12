@@ -41,6 +41,17 @@ h2{
                 </form>
     					<% end %>
           <% end %>
+          <% if tabletop.name == "Lost Patrol" %>
+            <h2 style="font-family:times;color:red"><%= tabletop.name %></h2>
+            <% if tabletop.version == "Original" %>
+              <h2 style="font-family:times;color:red"><%= tabletop.version %></h2>
+              <form action = "/lost_patrol_original" method = "post">
+              <p style="font-family: times; color:black">
+                <button type="Submit" name = "" Value = "lost_patrol_original" class="btn btn-outline-primary">++Proceed++</button>
+              </p>
+              </form>
+            <% end %>
+          <% end %>
 			<!-- Display .png of tabletop game -->
 		<% end %>
 	</div>

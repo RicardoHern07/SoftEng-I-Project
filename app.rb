@@ -96,6 +96,20 @@ get "/" do
 	erb :index
 end
 
+# Post to create hex map
+post "/lost_patrol_original" do
+	authenticate!
+	@number_of_players = 2
+	@player_string = "a"
+	@iterator_for_names = 1;
+
+	if (user_sessions_number == 0 && current_user.role == 0) || current_user.role == 1 || current_user.role == 2
+		erb :"lostpatrol/create_hex"
+	else
+		redirect "/upgrade"
+	end
+end
+
 #displays all tabletop games available with their respective textboxes 
 #so that the user says how many players they have in their session
 get "/tabletop_display" do
