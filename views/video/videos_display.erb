@@ -1,0 +1,16 @@
+
+<div class ="container">
+	<% @videos.each do |video| %>
+		<% if @cur_user.pro == true || @cur_user.administrator == true %>
+			<h> <%= video.title %> </h>
+			<iframe width="560" height="315" src="<%= video.video_url %>" frameborder="0" allowfullscreen></iframe>
+			<p> <%= video.description %> </p>
+		<% elsif @cur_user.pro == false  || @cur_user.administrator == false %>
+			<% if video.pro == false %>
+				<h> <%= video.title %> </h>
+				<iframe width="560" height="315" src="<%= video.video_url %>" frameborder="0" allowfullscreen></iframe>
+				<p> <%= video.description %> </p>
+			<% end %>
+		<% end %>
+	<% end %> 
+</div>
